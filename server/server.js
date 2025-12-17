@@ -1,12 +1,12 @@
-import express from "express";
 import "dotenv/config";
+import express from "express";
 import cors from "cors";
 import http from "http";
 import { connectDB } from "./lib/db.js";
 import userRouter from "./routes/userRoutes.js";
 import messageRouter from "./routes/messageRoutes.js";
 import { Server } from "socket.io";
-import { disconnect } from "process";
+
 
 // create express app and HTTp server
 

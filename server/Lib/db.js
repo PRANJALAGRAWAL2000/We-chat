@@ -4,10 +4,17 @@ import mongoose from "mongoose";
 
 export const connectDB = async () =>{
     try {
-        mongoose.connection.on('connected', ()=> console.log('Database Connected'))
+        if (mongoose.connection.readyState === 1) return;
+
+        mongoose.connection.on('connected', ()=> 
+            console.log('Database Connected')
+        );
         await mongoose.connect(`${process.env.MONGODB_URI}/WE-CHAT`)
+        
     }catch(error){
-        console.log(error);
+        console.log("DB error", error);
 
     }
-}
+};
+
+export default connectDB;
