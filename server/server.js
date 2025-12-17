@@ -38,11 +38,7 @@ io.on("connection", (socket)=>{
     })
 
 })
-
-
-
 // middleware setup
-
 
 app.use(cors({
     origin: 'http://localhost:5173', // your Vite frontend
@@ -52,9 +48,15 @@ app.use(cors({
 app.use(express.json({limit:"4mb"}));
 
 // Routes setup (#http://localhost:5000/api/status)
+app.get("/", (req, res) => res.send("Server running"));
 app.use("/api/status", (req, res)=> res.send("server is live") ); 
 app.use("/api/auth", userRouter);
 app.use("/api/messages", messageRouter)
+
+// ✅ Add root route and 404 catch-all here
+app.use((req, res) => {
+  res.status(404).json({ message: "Route not found" });
+});
 
 // connect to mongodb
 await connectDB();
