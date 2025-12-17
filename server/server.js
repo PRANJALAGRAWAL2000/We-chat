@@ -53,7 +53,7 @@ app.use("/api/status", (req, res)=> res.send("server is live") );
 app.use("/api/auth", userRouter);
 app.use("/api/messages", messageRouter)
 
-// ✅ Add root route and 404 catch-all here
+// Add root route and 404 catch-all here
 app.use((req, res) => {
   res.status(404).json({ message: "Route not found" });
 });
